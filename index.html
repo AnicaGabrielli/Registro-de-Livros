@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Livros</title>
+    <style>
+        label{
+            display:block;
+        }
+    </style>
+</head>
+<body>
+
+    <section>
+            <label for="nome">Nome do livro:</label>
+            <input type="text" name="nome" id="nome">
+    
+            <label for="autor">Autor:</label>
+            <input type="text" name="autor" id="autor">
+    
+            <label for="editora">Editora:</label>
+            <input type="text" name="editora" id="editora">
+    
+            <label for="anoPublicacao">Ano de Publicação:</label>
+            <input type="date" name="anoPublicacao" id="anoPublicacao">
+    
+            <button type="button" onclick="livro.salvar()">Salvar</button>
+    </section>
+    <section id="lista"></section>
+<script src="script.js"></script>
+</body>
+</html>
