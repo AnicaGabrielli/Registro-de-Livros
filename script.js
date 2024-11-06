@@ -30,7 +30,9 @@ class Livro{
     listar(){
         const lista = document.getElementById('lista');
         lista.innerHTML ='';
+
         for(let i = 0; i < nomes.length; i++){
+
         const listaLivro = document.createElement('ul');
         listaLivro.classList.add('listaLivro');
 
@@ -54,7 +56,8 @@ class Livro{
         
         listaLivro.append(anoElemento);
 
-        const editar = document.createElement('button');
+        const editar = document.createElement('a');
+        editar.href = '#form';
         editar.classList.add('editar');
         editar.textContent = 'Editar';
         editar.addEventListener('click', ()=> this.editar(i));
@@ -85,32 +88,48 @@ class Livro{
     }
 
     editar(i){
-       document.getElementById('nome').value = nomes[i];
-       document.getElementById('autor').value = autores[i];
-       document.getElementById('editora').value = editoras[i];
-       document.getElementById('anoPublicacao').value = anosPublicacao[i];
-       document.getElementById('salvo').style.display = 'none';
 
-       let salvarEdicaoBtn = document.getElementById('salvarEdicao');
-       if(!salvarEdicaoBtn){
-        salvarEdicaoBtn = document.createElement('button');
-        salvarEdicaoBtn.id = 'salvarEdicao';
-        salvarEdicaoBtn.textContent = 'Salvar edição';
-        salvarEdicaoBtn.addEventListener('click', ()=>this.salvarEdicao(i));
-        document.querySelector('section').append(salvarEdicaoBtn);
-       }else[
-        salvarEdicaoBtn.style.display = 'inline-block'
-       ]
+        document.getElementById('nome').value = nomes[i];
+        document.getElementById('autor').value = autores[i];
+        document.getElementById('editora').value = editoras[i];    
+        document.getElementById('anoPublicacao').value = anosPublicacao[i];
+        document.getElementById('salvo').style.display = 'none';
+        
+        let salvarEdicaoBtn = document.getElementById('salvarEdicao');
 
+        if(!salvarEdicaoBtn){
 
+            salvarEdicaoBtn = document.createElement('button');
+            salvarEdicaoBtn.id = 'salvarEdicao';
+            salvarEdicaoBtn.textContent = 'Salvar edição';
+            salvarEdicaoBtn.addEventListener('click', ()=>this.salvarEdicao(i));
+            document.querySelector('section').append(salvarEdicaoBtn);
+
+        }else{
+
+            salvarEdicaoBtn.style.display = 'inline-block';
+       }
     }
 
     salvarEdicao(i){
-        nomes[i] = document.getElementById('nome').value;
-        autores[i] = document.getElementById('autor').value;
-        editoras[i] = document.getElementById('editora').value;
-        anosPublicacao[i] = document.getElementById('anoPublicacao').value;
-    
+       const nome =   nomes[i] = document.getElementById('nome').value;
+       const autor = autores[i] = document.getElementById('autor').value;
+       const editora = editoras[i] = document.getElementById('editora').value;
+       const anoPublicacao = anosPublicacao[i] = document.getElementById('anoPublicacao').value;
+
+       if(!nome || !autor || !editora || !anoPublicacao){
+        alert('Por favor, preencha todos os campos.');
+        return;
+       }
+
+       const dataPublicacao = new Date(anoPublicacao);
+       const anoLivro =  dataPublicacao.getFullYear();
+
+       nomes[i] = nome;
+       autores[i] = autor;
+       editoras[i] = editora;
+       anosPublicacao[i] = anoLivro;
+
         this.listar();
         limparCampos();
         document.getElementById('salvo').style.display = 'inline-block';
@@ -121,6 +140,7 @@ class Livro{
         const autor = document.getElementById('autor').value;
         const editora = document.getElementById('editora').value;
         const anoPublicacao = document.getElementById('anoPublicacao').value;
+
         if(nome && autor && editora && anoPublicacao){
             const dataPublicacao = new Date(anoPublicacao);
             const anoLivro =  dataPublicacao.getFullYear();
@@ -129,12 +149,13 @@ class Livro{
             alert('Por favor, preencha todos os campos.');
             return null;
         }
-
     }
 }
+
 const livro = new Livro();
 
 function limparCampos (){
+    
     document.getElementById('nome').value = '';
     document.getElementById('autor').value = '';
     document.getElementById('editora').value = '';
