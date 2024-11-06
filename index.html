@@ -4,15 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Livros</title>
-    <style>
-        label{
-            display:block;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-    <section>
+    <nav><h1>REGISTRO DE LIVROS</h1></nav>
+    <section id = "form">
             <label for="nome">Nome do livro:</label>
             <input type="text" name="nome" id="nome">
     
@@ -25,8 +21,9 @@
             <label for="anoPublicacao">Ano de Publicação:</label>
             <input type="date" name="anoPublicacao" id="anoPublicacao">
     
-            <button type="button" onclick="livro.salvar()">Salvar</button>
+            <button type="button" id = "salvo" onclick="livro.salvar()">Salvar</button>
     </section>
+    
     <section id="lista"></section>
 <script src="script.js"></script>
 </body>

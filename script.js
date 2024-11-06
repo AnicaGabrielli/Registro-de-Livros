@@ -1,7 +1,7 @@
 let nomes = [];
 let autores = [];
 let editoras = [];
-let anosPublicacao =[];
+let anosPublicacao = [];
 
 
 
@@ -25,11 +25,7 @@ class Livro{
             anosPublicacao.push(livro.anoLivro);
             this.listar();
         }
-        console.log(livro);
-
-        
-       
-        
+        limparCampos();
     }
     listar(){
         const lista = document.getElementById('lista');
@@ -61,7 +57,7 @@ class Livro{
         const editar = document.createElement('button');
         editar.classList.add('editar');
         editar.textContent = 'Editar';
-        editar.addEventListener('click', ()=> this.deletar(i));
+        editar.addEventListener('click', ()=> this.editar(i));
         listaLivro.append(editar);
 
         const deletar = document.createElement('button');
@@ -72,7 +68,6 @@ class Livro{
 
         lista.append(listaLivro);
         }
-
 
 
     }
@@ -87,6 +82,39 @@ class Livro{
         }
         
 
+    }
+
+    editar(i){
+       document.getElementById('nome').value = nomes[i];
+       document.getElementById('autor').value = autores[i];
+       document.getElementById('editora').value = editoras[i];
+       document.getElementById('anoPublicacao').value = anosPublicacao[i];
+       document.getElementById('salvo').style.display = 'none';
+
+       let salvarEdicaoBtn = document.getElementById('salvarEdicao');
+       if(!salvarEdicaoBtn){
+        salvarEdicaoBtn = document.createElement('button');
+        salvarEdicaoBtn.id = 'salvarEdicao';
+        salvarEdicaoBtn.textContent = 'Salvar edição';
+        salvarEdicaoBtn.addEventListener('click', ()=>this.salvarEdicao(i));
+        document.querySelector('section').append(salvarEdicaoBtn);
+       }else[
+        salvarEdicaoBtn.style.display = 'inline-block'
+       ]
+
+
+    }
+
+    salvarEdicao(i){
+        nomes[i] = document.getElementById('nome').value;
+        autores[i] = document.getElementById('autor').value;
+        editoras[i] = document.getElementById('editora').value;
+        anosPublicacao[i] = document.getElementById('anoPublicacao').value;
+    
+        this.listar();
+        limparCampos();
+        document.getElementById('salvo').style.display = 'inline-block';
+        document.getElementById('salvarEdicao').style.display = 'none';
     }
     lerDados(){
         const nome = document.getElementById('nome').value;
@@ -106,3 +134,9 @@ class Livro{
 }
 const livro = new Livro();
 
+function limparCampos (){
+    document.getElementById('nome').value = '';
+    document.getElementById('autor').value = '';
+    document.getElementById('editora').value = '';
+    document.getElementById('anoPublicacao').value = '';
+}
